@@ -1,0 +1,6 @@
+{
+   "eslint.enable": true,
+   "jest.enableCodeLens": true,
+   "jest.enableInlineErrorMessages": false,
+   "jest.enableSnapshotUpdateMessages": false
+}
