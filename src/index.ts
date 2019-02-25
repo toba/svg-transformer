@@ -3,13 +3,16 @@ import svgr from '@svgr/core';
 import { TransformOptions, BabelFileResult } from '@babel/core';
 //import metroBabel from 'metro-react-native-babel-transformer';
 import metroTransform from 'metro/src/reactNativeTransformer';
-import { makeSVGO } from './index';
 
 /**
  * SVGR plugin to run SVGO with custom configuration.
  */
 export const svgoPlugin: svgr.Plugin = src => {
-   const svgo = makeSVGO({
+   /**
+    * SVGO plugin configurations.
+    * @see https://github.com/svg/svgo#what-it-can-do
+    */
+   const plugins: { [key: string]: string | boolean | object } = {
       removeXMLNS: true,
       // https://github.com/svg/svgo/blob/master/plugins/removeEditorsNSData.js
       removeEditorsNSData: {
@@ -18,6 +21,9 @@ export const svgoPlugin: svgr.Plugin = src => {
       sortAttrs: true,
       removeViewBox: true,
       removeDimensions: true
+   };
+   const svgo = new SVGO({
+      plugins: Object.keys(plugins).map(key => ({ [key]: plugins[key] } as any))
    });
 
    let out = '';
