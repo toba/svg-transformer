@@ -1,8 +1,6 @@
 import SVGO from 'svgo';
 import svgr from '@svgr/core';
 import { TransformOptions, BabelFileResult } from '@babel/core';
-//import metroBabel from 'metro-react-native-babel-transformer';
-import metroTransform from 'metro/src/reactNativeTransformer';
 
 /**
  * SVGR plugin to run SVGO with custom configuration.
@@ -55,12 +53,13 @@ export const svgToJSX = (svg: string) =>
  * different SVGO and template configuration.
  *
  * @see https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md
+ * @see https://github.com/facebook/metro/blob/master/packages/metro/src/JSTransformer/worker.js
  */
-export function transform(
+export async function transform(
    src: string | { src: string; filename: string; options?: TransformOptions },
    filename: string,
    options?: TransformOptions
-): BabelFileResult {
+): Promise<BabelFileResult> {
    if (typeof src === 'object') {
       // handle RN >= 0.46
       ({ src, filename, options } = src);
@@ -69,6 +68,9 @@ export function transform(
    if (options === undefined) {
       options = {};
    }
+
+   //import metroBabel from 'metro-react-native-babel-transformer';
+   const metroTransform = await import('metro/src/reactNativeTransformer');
 
    return filename.endsWith('.svg')
       ? metroTransform.transform({
