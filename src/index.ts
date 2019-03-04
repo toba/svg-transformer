@@ -5,7 +5,7 @@ import { TransformOptions, BabelFileResult } from '@babel/core';
 /**
  * SVGR plugin to run SVGO with custom configuration.
  */
-export const svgoPlugin: svgr.Plugin = src => {
+export const SvgoPlugin: svgr.Plugin = src => {
    /**
     * SVGO plugin configurations.
     * @see https://github.com/svg/svgo#what-it-can-do
@@ -42,7 +42,7 @@ export const svgToJSX = (svg: string) =>
    svgr.sync(svg, {
       native: true,
       svgo: true,
-      plugins: [svgoPlugin, '@svgr/plugin-jsx']
+      plugins: [SvgoPlugin, '@svgr/plugin-jsx']
    });
 
 /**

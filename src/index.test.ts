@@ -1,7 +1,7 @@
 import '@toba/test';
 import path from 'path';
 import { readFileText } from '@toba/test';
-import { transform, svgToJSX, svgoPlugin } from './index';
+import { transform, svgToJSX, SvgoPlugin } from './index';
 
 let svg = '';
 
@@ -12,7 +12,7 @@ beforeAll(async () => {
 });
 
 test('uses SVGO to prepare SVG', () => {
-   const out = svgoPlugin(svg, { svgo: true }, null);
+   const out = SvgoPlugin(svg, { svgo: true }, null);
 
    ['xmlns:bx', 'xmlns', 'style='].forEach(nope => {
       expect(out.includes(nope)).toBe(false);
