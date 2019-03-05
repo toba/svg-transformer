@@ -42,7 +42,7 @@ export const svgToJSX = (svg: string, native = false) =>
    svgr.sync(svg, {
       native,
       svgo: true,
-      plugins: [SvgoPlugin, '@svgr/plugin-jsx']
+      plugins: [SvgoPlugin, '@svgr/plugin-jsx', '@svgr/plugin-prettier']
    });
 
 /**
