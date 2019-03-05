@@ -38,9 +38,9 @@ export const SvgoPlugin: svgr.Plugin = src => {
  * Use SVGR to convert SVG source to JSX using a custom SVGO and template
  * configuration.
  */
-export const svgToJSX = (svg: string) =>
+export const svgToJSX = (svg: string, native = false) =>
    svgr.sync(svg, {
-      native: true,
+      native,
       svgo: true,
       plugins: [SvgoPlugin, '@svgr/plugin-jsx']
    });
