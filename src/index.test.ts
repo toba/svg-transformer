@@ -24,7 +24,7 @@ test('uses SVGO to prepare SVG', () => {
 test('converts SVG to a JSX component', () => {
    const jsx = svgToJSX(svg);
 
-   ['React from "react"'].forEach(yep => {
+   ["React from 'react'"].forEach(yep => {
       expect(jsx.includes(yep)).toBe(true);
    });
    expect(jsx).toMatchSnapshot();
