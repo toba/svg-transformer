@@ -23,15 +23,15 @@ export const SvgoPlugin: svgr.Plugin = src => {
       sortAttrs: true,
       removeViewBox: true,
       removeDimensions: true,
-      //removeStyleElement: true,
+      removeStyleElement: true,
       convertStyleToAttrs: true
    };
    const svgo = new SVGO({
       plugins: [
-         ...Object.keys(plugins).map(key => ({ [key]: plugins[key] } as any)),
          {
             inlineStylePlugin
-         }
+         },
+         ...Object.keys(plugins).map(key => ({ [key]: plugins[key] } as any))
       ]
    });
 
