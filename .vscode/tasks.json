@@ -5,6 +5,7 @@
          "label": "Test",
          "command": "./node_modules/.bin/jest",
          "presentation": {
+            "echo": false,
             "showReuseMessage": false,
             "clear": true
          },

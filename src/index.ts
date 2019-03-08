@@ -1,5 +1,6 @@
 import SVGO from 'svgo';
 import svgr from '@svgr/core';
+import { inlineStylePlugin } from './svgo-style';
 import { TransformOptions, BabelFileResult } from '@babel/core';
 
 /**
@@ -16,13 +17,22 @@ export const SvgoPlugin: svgr.Plugin = src => {
       removeEditorsNSData: {
          additionalNamespaces: ['https://boxy-svg.com']
       },
+      removeAttrs: {
+         attrs: ['id']
+      },
       sortAttrs: true,
       removeViewBox: true,
       removeDimensions: true,
+      //removeStyleElement: true,
       convertStyleToAttrs: true
    };
    const svgo = new SVGO({
-      plugins: Object.keys(plugins).map(key => ({ [key]: plugins[key] } as any))
+      plugins: [
+         ...Object.keys(plugins).map(key => ({ [key]: plugins[key] } as any)),
+         {
+            inlineStylePlugin
+         }
+      ]
    });
 
    let out = '';
