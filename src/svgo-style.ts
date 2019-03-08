@@ -1,5 +1,4 @@
 import SVGO from 'svgo';
-import { stringLiteral } from '@babel/types';
 
 export interface RuleGroup {
    selector: string;
@@ -30,7 +29,6 @@ function traverse(
    }
 }
 
-// .a{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round}"
 export function parseCSS(css: string): RuleGroup {
    const selector = css.substring(0, css.indexOf('{'));
    const pairs = css
