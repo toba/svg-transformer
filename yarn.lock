@@ -1095,9 +1095,9 @@
   integrity sha512-CRD+30OcogIqu/lXmqvVvg0soVelHJS1aqZFOj3qM/+yQBFKh4NqkjFpzJzCmzag0lkuxKK+wDHdzryWxiT1JA==
 
 "@toba/types@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@toba/types/-/types-1.1.0.tgz#f36151568d58a3cd4c3793296dcbb79646cb25a0"
-  integrity sha512-SJCdGpX7Dspib/o66IlszywnWMzwKbl3HX3XN6heVAnnCnoXSk6HJUFGMQIy4RgZCSlyFtgQg9RkDpDsjK++0Q==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@toba/types/-/types-1.1.1.tgz#e4cc4ae28f40c875beb3dd0f6db8a126becd2255"
+  integrity sha512-hjcBjUGOPWAPiuDxMtdHaY4ii0GFngavFdTbyciOitJeifnNx2dyudqx6Jd29ZZdx224/BF5rkyAe7ezEWuRnw==
 
 "@types/babel__core@^7.0.5", "@types/babel__core@^7.1.0":
   version "7.1.0"
