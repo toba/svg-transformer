@@ -1,5 +1,5 @@
 import SVGO from 'svgo';
-import { camelize, is } from '@toba/node-tools';
+import { camelize, is, removeItem } from '@toba/node-tools';
 
 export interface RuleGroup {
    selector: string;
@@ -60,10 +60,10 @@ export function parseCSS(css: string): RuleGroup[] | null {
 }
 
 /**
- * SVGO plugin that inlines style sheets.
+ * SVGO plugin that converts style sheet definintions to element attributes.
  * @see https://github.com/svg/svgo/blob/master/plugins/reusePaths.js
  */
-export const inlineStylePlugin: SVGO.Plugin<SVGO.SyntaxTree, void> = {
+export const convertStyleDefToAttrs: SVGO.Plugin<SVGO.SyntaxTree, void> = {
    type: 'full',
    active: true,
    description: 'Convert stylesheet to element attributes',
@@ -93,7 +93,16 @@ export const inlineStylePlugin: SVGO.Plugin<SVGO.SyntaxTree, void> = {
                item as SVGO.Element,
                styles.find(s => s.selector == '.' + item.attr('class').value)
             );
+            delete item.class;
             item.removeAttr('class');
+         }
+      });
+
+      traverse(ast, item => {
+         if (item.isElem('defs')) {
+            if (!removeItem(item.parentNode.content, item)) {
+               console.error('Unable to remove thing');
+            }
          }
       });
 

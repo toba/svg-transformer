@@ -18,12 +18,21 @@ test('uses SVGO to prepare SVG', () => {
    const logoJSX = SvgoPlugin(logoSVG, { svgo: true });
    const gaugeJSX = SvgoPlugin(gaugeSVG, { svgo: true });
 
-   ['xmlns:bx', 'xmlns', 'style=', 'id="pleaseRemove"', '<style>'].forEach(
-      nope => {
-         expect(logoJSX.includes(nope)).toBe(false);
-         expect(gaugeJSX.includes(nope)).toBe(false);
-      }
-   );
+   [
+      'xmlns:bx',
+      'xmlns',
+      'style=',
+      'id="pleaseRemove"',
+      '<style>'
+      // '<defs'
+   ].forEach(nope => {
+      expect(logoJSX.includes(nope)).toBe(false);
+      expect(gaugeJSX.includes(nope)).toBe(false);
+   });
+
+   ['class='].forEach(nope => {
+      expect(gaugeJSX.includes(nope)).toBe(false);
+   });
 
    expect(logoJSX).toMatchSnapshot();
    expect(gaugeJSX).toMatchSnapshot();

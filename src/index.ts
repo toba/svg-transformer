@@ -1,6 +1,6 @@
 import SVGO from 'svgo';
 import svgr from '@svgr/core';
-import { inlineStylePlugin } from './svgo-style';
+import { convertStyleDefToAttrs } from './svgo-style';
 import { TransformOptions, BabelFileResult } from '@babel/core';
 
 /**
@@ -20,16 +20,13 @@ export const SvgoPlugin: svgr.Plugin = src => {
       removeAttrs: {
          attrs: ['id']
       },
-      sortAttrs: true,
-      removeViewBox: true,
       removeDimensions: true,
-      removeStyleElement: true,
       convertStyleToAttrs: true
    };
    const svgo = new SVGO({
       plugins: [
          {
-            inlineStylePlugin
+            convertStyleDefToAttrs
          },
          ...Object.keys(plugins).map(key => ({ [key]: plugins[key] } as any))
       ]
