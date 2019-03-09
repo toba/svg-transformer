@@ -93,7 +93,7 @@ export const convertStyleDefToAttrs: SVGO.Plugin<SVGO.SyntaxTree, void> = {
                item as SVGO.Element,
                styles.find(s => s.selector == '.' + item.attr('class').value)
             );
-            delete item.class;
+            delete (item as SVGO.Element).class;
             item.removeAttr('class');
          }
       });
