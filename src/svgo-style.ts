@@ -9,6 +9,7 @@ export interface RuleGroup {
 /**
  *
  * @param excludeRules Names of rules *not* to convert to attributes
+ * @see https://github.com/react-native-community/react-native-svg#supported-elements
  */
 function applyStyleRules(
    el: SVGO.Element,
@@ -19,6 +20,11 @@ function applyStyleRules(
       style.rules.forEach((value, key) => {
          const name = camelize(key);
          if (!el.hasAttr(name) && !excludeRules.includes(name)) {
+            if (name == 'stroke') {
+               // if stroke is set then inherit the color attribute from
+               // the main svg element
+               value = 'currentColor';
+            }
             el.addAttr({ name, local: name, prefix: '', value });
          }
       });
@@ -99,8 +105,7 @@ export const convertStyleDefToAttrs: SVGO.Plugin<SVGO.SyntaxTree, void> = {
          if (item.hasAttr('class')) {
             applyStyleRules(
                item as SVGO.Element,
-               styles.find(s => s.selector == '.' + item.attr('class').value),
-               'stroke'
+               styles.find(s => s.selector == '.' + item.attr('class').value)
             );
             delete (item as SVGO.Element).class;
             item.removeAttr('class');
