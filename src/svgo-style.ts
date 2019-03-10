@@ -109,6 +109,15 @@ export const convertStyleDefToAttrs: SVGO.Plugin<SVGO.SyntaxTree, void> = {
             );
             delete (item as SVGO.Element).class;
             item.removeAttr('class');
+         } else if (item.isElem('path')) {
+            // TODO: also circle, etc.?
+            const attr = 'stroke';
+            const value = 'currentColor';
+            if (item.hasAttr(attr)) {
+               item.attr(attr).value = value;
+            } else {
+               item.addAttr({ name, local: name, prefix: '', value });
+            }
          }
       });
 

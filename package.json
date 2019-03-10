@@ -1,6 +1,6 @@
 {
    "name": "@toba/svg-transformer",
-   "version": "1.5.2",
+   "version": "1.5.3",
    "description": "Toba SVG transformer module",
    "private": false,
    "author": {
