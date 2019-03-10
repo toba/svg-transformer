@@ -6,11 +6,19 @@ export interface RuleGroup {
    rules: Map<string, string>;
 }
 
-function applyStyleRules(el: SVGO.Element, style?: RuleGroup): void {
+/**
+ *
+ * @param excludeRules Names of rules *not* to convert to attributes
+ */
+function applyStyleRules(
+   el: SVGO.Element,
+   style?: RuleGroup,
+   ...excludeRules: string[]
+): void {
    if (style !== undefined) {
       style.rules.forEach((value, key) => {
          const name = camelize(key);
-         if (!el.hasAttr(name)) {
+         if (!el.hasAttr(name) && !excludeRules.includes(name)) {
             el.addAttr({ name, local: name, prefix: '', value });
          }
       });
@@ -91,7 +99,8 @@ export const convertStyleDefToAttrs: SVGO.Plugin<SVGO.SyntaxTree, void> = {
          if (item.hasAttr('class')) {
             applyStyleRules(
                item as SVGO.Element,
-               styles.find(s => s.selector == '.' + item.attr('class').value)
+               styles.find(s => s.selector == '.' + item.attr('class').value),
+               'stroke'
             );
             delete (item as SVGO.Element).class;
             item.removeAttr('class');
