@@ -6,7 +6,7 @@ import { TransformOptions, BabelFileResult } from '@babel/core';
 /**
  * SVGR plugin to run SVGO with custom configuration.
  */
-export const SvgoPlugin: svgr.Plugin = src => {
+export const SvgoPlugin: svgr.Plugin = (src, config) => {
    /**
     * SVGO plugin configurations.
     * @see https://github.com/svg/svgo#what-it-can-do
@@ -23,6 +23,8 @@ export const SvgoPlugin: svgr.Plugin = src => {
       removeDimensions: true,
       convertStyleToAttrs: true
    };
+   // TODO: read config to set conversion options
+
    const svgo = new SVGO({
       plugins: [
          {
