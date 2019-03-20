@@ -62,6 +62,7 @@ export const svgToJSX = (svg: string, native = false) =>
  * This is meant to be equivalent to `react-native-svg-transformer` but with
  * different SVGO and template configuration.
  *
+ * @see https://github.com/kristerkari/react-native-svg-transformer/blob/master/index.js
  * @see https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md
  * @see https://github.com/facebook/metro/blob/master/packages/metro/src/JSTransformer/worker.js
  */
@@ -79,8 +80,8 @@ export async function transform(
       options = {};
    }
 
-   //import metroBabel from 'metro-react-native-babel-transformer';
-   const metroTransform = await import('metro/src/reactNativeTransformer');
+   const metroTransform = await import('metro-react-native-babel-transformer');
+   //const metroTransform = await import('metro/src/reactNativeTransformer');
 
    return filename.endsWith('.svg')
       ? metroTransform.transform({
