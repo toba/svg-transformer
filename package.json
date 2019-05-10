@@ -1,45 +1,41 @@
 {
-   "name": "@toba/svg-transformer",
-   "version": "1.5.4",
-   "description": "Toba SVG transformer module",
-   "private": false,
-   "author": {
-      "name": "Jason Abbott",
-      "url": "http://github.com/toba"
-   },
-   "license": "MIT",
-   "publishConfig": {
-      "access": "public"
-   },
-   "main": "cjs/index.js",
-   "types:": "cjs/index.d.ts",
-   "files": [
-      "cjs/**/*"
-   ],
-   "scripts": {
-      "prepublishOnly": "./node_modules/.bin/tsc --project tsconfig.build.json",
-      "link": "ln -s ~/dev/src/toba/svg-loader/node_modules/react-native/ ~/dev/src/toba/svg-loader/node_modules/@toba/example/node_modules/",
-      "test": "jest --coverage"
-   },
-   "devDependencies": {
-      "@toba/develop": "^6.0.0",
-      "@toba/test": "^3.0.0",
-      "@types/babel__core": "^7.0.5",
-      "@types/babel__template": "^7.0.2",
-      "@types/react-native": "^0.57.38",
-      "babel-loader": "^8.0.5",
-      "react-native": "^0.59.0"
-   },
-   "repository": {
-      "type": "git",
-      "url": "https://github.com/toba/svg-transformer"
-   },
-   "dependencies": {
-      "@svgr/core": "^4.1.0",
-      "@svgr/plugin-jsx": "^4.1.0",
-      "@svgr/plugin-prettier": "^4.0.3",
-      "@toba/node-tools": "^1.2.0",
-      "metro-react-native-babel-transformer": "^0.53.1",
-      "svgo": "^1.1.1"
-   }
+  "name": "@toba/svg-transformer",
+  "version": "1.6.0",
+  "description": "Toba SVG transformer module",
+  "private": false,
+  "author": {
+    "name": "Jason Abbott",
+    "url": "http://github.com/toba"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "cjs/index.js",
+  "types:": "cjs/index.d.ts",
+  "files": [
+    "cjs/**/*"
+  ],
+  "scripts": {
+    "prepublishOnly": "./node_modules/.bin/tsc --project tsconfig.build.json",
+    "link": "ln -s ~/dev/src/toba/svg-loader/node_modules/react-native/ ~/dev/src/toba/svg-loader/node_modules/@toba/example/node_modules/",
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "@toba/develop": "^6.0.0",
+    "@toba/test": "^3.0.0",
+    "@types/babel__core": "^7.0.5",
+    "@types/babel__template": "^7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toba/svg-transformer"
+  },
+  "dependencies": {
+    "@svgr/core": "^4.1.0",
+    "@svgr/plugin-jsx": "^4.1.0",
+    "@svgr/plugin-prettier": "^4.0.3",
+    "@toba/node-tools": "^1.2.0",
+    "svgo": "^1.1.1"
+  }
 }
