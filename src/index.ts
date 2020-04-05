@@ -1,7 +1,7 @@
-import SVGO from 'svgo';
-import svgr from '@svgr/core';
-import { convertStyleDefToAttrs } from './svgo-style';
-import { TransformOptions, BabelFileResult } from '@babel/core';
+import SVGO from 'svgo'
+import svgr from '@svgr/core'
+import { TransformOptions, BabelFileResult } from '@babel/core'
+import { convertStyleDefToAttrs } from './svgo-style'
 
 /**
  * SVGR plugin to run SVGO with custom configuration.
@@ -15,34 +15,34 @@ export const SvgoPlugin: svgr.Plugin = (src, config) => {
       removeXMLNS: true,
       // https://github.com/svg/svgo/blob/master/plugins/removeEditorsNSData.js
       removeEditorsNSData: {
-         additionalNamespaces: ['https://boxy-svg.com']
+         additionalNamespaces: ['https://boxy-svg.com'],
       },
       removeAttrs: {
-         attrs: ['id']
+         attrs: ['id'],
       },
       removeDimensions: true,
-      convertStyleToAttrs: true
-   };
+      convertStyleToAttrs: true,
+   }
    // TODO: read config to set conversion options
 
    const svgo = new SVGO({
       plugins: [
          {
-            convertStyleDefToAttrs
+            convertStyleDefToAttrs,
          },
-         ...Object.keys(plugins).map(key => ({ [key]: plugins[key] } as any))
-      ]
-   });
+         ...Object.keys(plugins).map((key) => ({ [key]: plugins[key] } as any)),
+      ],
+   })
 
-   let out = '';
+   let out = ''
 
    // use private method because it is synchronous
    svgo._optimizeOnce(src, null, (svg: SVGO.OptimizedSvg) => {
-      out = svg.data;
-   });
+      out = svg.data
+   })
 
-   return out;
-};
+   return out
+}
 
 /**
  * Use SVGR to convert SVG source to JSX using a custom SVGO and template
@@ -52,8 +52,8 @@ export const svgToJSX = (svg: string, native = false) =>
    svgr.sync(svg, {
       native,
       svgo: true,
-      plugins: [SvgoPlugin, '@svgr/plugin-jsx', '@svgr/plugin-prettier']
-   });
+      plugins: [SvgoPlugin, '@svgr/plugin-jsx', '@svgr/plugin-prettier'],
+   })
 
 /**
  * Babel transformer that runs SVGO for all content from a file name ending
@@ -73,21 +73,21 @@ export async function transform(
 ): Promise<BabelFileResult> {
    if (typeof src === 'object') {
       // handle RN >= 0.46
-      ({ src, filename, options } = src);
+      ;({ src, filename, options } = src)
    }
 
    if (options === undefined) {
-      options = {};
+      options = {}
    }
 
-   const metroTransform = await import('metro-react-native-babel-transformer');
+   const metroTransform = await import('metro-react-native-babel-transformer')
    //const metroTransform = await import('metro/src/reactNativeTransformer');
 
    return filename.endsWith('.svg')
       ? metroTransform.transform({
            src: svgToJSX(src),
            filename,
-           options
+           options,
         })
-      : metroTransform.transform({ src, filename, options });
+      : metroTransform.transform({ src, filename, options })
 }
